@@ -1,0 +1,26 @@
+# Configuration for YCB-Video (YCB-V) dataset
+dataset: "ycbv"
+
+# Inherit from default config
+defaults:
+  - default
+
+# Dataset-specific algorithm parameters
+algorithm:
+  # Tuned for YCB-V objects (varied sizes, some symmetric)
+  voxel_size: 0.005        
+  normal_radius: 0.012     
+  fpfh_radius: 0.03        
+  ransac_threshold: 0.012  
+  max_iterations: 120000   
+  icp_threshold: 0.002     
+
+# YCB-V specific evaluation
+evaluation:
+  add_threshold: 0.1       
+  adds_threshold: 0.1      # Important for symmetric objects
+  rotation_threshold: 15.0  
+  translation_threshold: 0.05
+
+# YCB-V object IDs (21 objects)
+object_ids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]

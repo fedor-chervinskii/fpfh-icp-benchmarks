@@ -1,0 +1,29 @@
+# Configuration for Linemod-Occluded (LM-O) dataset
+dataset: "lmo"
+
+# Inherit from default config
+defaults:
+  - default
+
+# Dataset-specific algorithm parameters
+algorithm:
+  # Tuned for LM-O objects (relatively small, textured)
+  voxel_size: 0.003        # Smaller voxel for better precision
+  normal_radius: 0.008     
+  fpfh_radius: 0.02        
+  ransac_threshold: 0.008  
+  max_iterations: 150000   # More iterations for harder cases
+  icp_threshold: 0.001     
+
+# LM-O specific evaluation
+evaluation:
+  add_threshold: 0.1       # 10% of object diameter
+  adds_threshold: 0.1      
+  rotation_threshold: 15.0  
+  translation_threshold: 0.05
+
+# Objects to evaluate (LM-O object IDs)
+object_ids: [1, 5, 6, 8, 9, 10, 11, 12]
+
+# Scenes to evaluate (optional, if not specified all test scenes will be used)
+# scene_ids: [1, 2, 3, 4, 5]

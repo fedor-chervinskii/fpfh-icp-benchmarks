@@ -1,0 +1,35 @@
+# Default configuration for FPFH-ICP algorithm
+algorithm:
+  # Point cloud preprocessing
+  voxel_size: 0.005        # Downsampling voxel size (meters)
+  
+  # Normal estimation
+  normal_radius: 0.01      # Radius for normal estimation (meters)
+  
+  # FPFH feature computation
+  fpfh_radius: 0.025       # Radius for FPFH features (meters)
+  
+  # RANSAC parameters
+  ransac_threshold: 0.01   # RANSAC inlier threshold (meters)
+  max_iterations: 100000   # Maximum RANSAC iterations
+  
+  # ICP parameters  
+  icp_threshold: 0.002     # ICP convergence threshold (meters)
+
+# Evaluation settings
+evaluation:
+  # Error thresholds
+  add_threshold: 0.1       # ADD threshold (fraction of object diameter)
+  adds_threshold: 0.1      # ADD-S threshold (fraction of object diameter)
+  rotation_threshold: 15.0 # Rotation error threshold (degrees)
+  translation_threshold: 0.05 # Translation error threshold (meters)
+  
+  # Visualization
+  save_visualizations: false
+  show_progress: true
+
+# Output settings
+output:
+  save_predictions: true
+  save_detailed_results: true
+  bop_format: true

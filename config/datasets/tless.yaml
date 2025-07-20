@@ -1,0 +1,26 @@
+# Configuration for T-LESS dataset
+dataset: "tless"
+
+# Inherit from default config
+defaults:
+  - default
+
+# Dataset-specific algorithm parameters
+algorithm:
+  # Tuned for T-LESS objects (industrial, many symmetric/textureless)
+  voxel_size: 0.004        
+  normal_radius: 0.01      
+  fpfh_radius: 0.025       
+  ransac_threshold: 0.01   
+  max_iterations: 200000   # More iterations for challenging objects
+  icp_threshold: 0.0015    
+
+# T-LESS specific evaluation
+evaluation:
+  add_threshold: 0.1       
+  adds_threshold: 0.1      # Critical for many symmetric T-LESS objects
+  rotation_threshold: 15.0  
+  translation_threshold: 0.05
+
+# T-LESS object IDs (30 objects)
+object_ids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
