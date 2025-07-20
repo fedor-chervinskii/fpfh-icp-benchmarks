@@ -53,6 +53,11 @@ Download a BOP dataset (e.g., LM-O):
 uv run python scripts/download_data.py --dataset lmo --path ./data
 ```
 
+**Download only BOP challenge subset (smaller, faster download):**
+```bash
+uv run python scripts/download_data.py --dataset lmo --path ./data --subset bop
+```
+
 ### Run Benchmark
 
 **One-liner to run benchmarking on a single dataset:**
@@ -65,6 +70,11 @@ uv run python scripts/run_benchmark.py --dataset lmo --data_path ./data --output
 uv run python scripts/run_benchmark.py --dataset lmo --data_path ./data --objects 1,2,5 --output_dir ./results
 ```
 
+**Run with verbose output to see detailed FPFH and ICP metrics:**
+```bash
+uv run python scripts/run_benchmark.py --dataset lmo --data_path ./data --output_dir ./results --verbose
+```
+
 **Run with custom configuration:**
 ```bash
 uv run python scripts/run_benchmark.py --config config/datasets/lmo.yaml --data_path ./data --output_dir ./results
@@ -75,8 +85,8 @@ uv run python scripts/run_benchmark.py --config config/datasets/lmo.yaml --data_
 - **LM-O** (Linemod-Occluded): `--dataset lmo`
 - **YCB-V** (YCB-Video): `--dataset ycbv`
 - **T-LESS**: `--dataset tless`
-- **ITODD**: `--dataset itodd`
-- **HB** (HomebrewedDB): `--dataset hb`
+
+*Note: ITODD and HB dataset support are planned for future releases.*
 
 ## Algorithm Details
 
@@ -97,10 +107,15 @@ Algorithm parameters can be configured via YAML files in the `config/` directory
 
 ## Results
 
-Results are saved in BOP-compatible format in the specified output directory:
-- Pose predictions in BOP CSV format
-- Evaluation metrics
-- Visualization images (optional)
+Results are saved in YAML format in the specified output directory:
+- Benchmark results with scene and object processing status
+- Algorithm performance metrics (when using `--verbose`)
+- Processing time and accuracy measurements
+
+When using `--verbose` mode, detailed metrics are displayed including:
+- **FPFH metrics**: Feature extraction timing, feature dimensions, radius parameters
+- **ICP metrics**: Registration fitness scores, convergence metrics, point-to-point distances
+- **Overall performance**: Processing times and algorithm confidence scores
 
 ## Development
 
@@ -117,6 +132,9 @@ uv run pytest --cov=src --cov-report=html
 ### Code Formatting
 
 ```bash
+# Install development dependencies first
+uv sync --dev
+
 # Format code with black
 uv run black src scripts tests
 
@@ -154,14 +172,6 @@ fpfh-icp-benchmarks/
 └── results/               # Output directory
 ```
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
 ## Citation
 
 If you use this code in your research, please cite:
@@ -169,9 +179,9 @@ If you use this code in your research, please cite:
 ```bibtex
 @misc{fpfh-icp-benchmarks,
     title={FPFH-ICP Benchmarks: Classic 6D Pose Estimation on BOP Datasets},
-    author={Your Name},
+    author={Fedor Chervinskii},
     year={2025},
-    url={https://github.com/your-username/fpfh-icp-benchmarks}
+    url={https://github.com/fedor-chervinskii/fpfh-icp-benchmarks}
 }
 ```
 
@@ -183,4 +193,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - [BOP Benchmark](https://bop.felk.cvut.cz/)
 - [Open3D Documentation](http://www.open3d.org/docs/)
-- [FPFH Paper](https://ieeexplore.ieee.org/document/5152473)
